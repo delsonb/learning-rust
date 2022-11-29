@@ -1,10 +1,56 @@
 fn main() {
-    loops_with_labels();
-    returning_from_a_loop();
-    repetition_with_loop_basic();
-    ternary_operator();
-    chained_if_and_else();
-    if_and_else();
+   loops_with_labels();
+   returning_from_a_loop();
+   repetition_with_loop_basic();
+   ternary_operator();
+   chained_if_and_else();
+   if_and_else();
+   repetition_with_while();
+   looping_through_a_collection_without_for();
+   looping_through_a_collection_with_for();
+   counting_down_with_for_loop();
+}
+
+fn counting_down_with_for_loop() {
+    // This is the equivalent of Python range(n)
+    // rev() reverse the collection
+    for number in (1..=3).rev() {
+        println!("{number}!");
+    }
+    println!("LIFTOFF!!!");
+}
+
+fn looping_through_a_collection_with_for() {
+    let a = [10, 20, 30, 40, 50];
+
+    for element in a {
+        println!("the value is: {element}");
+    }
+}
+
+fn looping_through_a_collection_without_for() {
+    let a = [10, 20, 30, 40, 50];
+    let mut index = 0;
+
+    // error prone and slow
+    // compiler adds runtime code to check whether the index is within the bounds of the array
+    while index < 5 {
+        println!("the value is: {}", a[index]);
+
+        index += 1;
+    }
+}
+
+fn repetition_with_while() {
+    let mut number = 3;
+
+    while number != 0 {
+        println!("{number}!");
+
+        number -= 1;
+    }
+
+    println!("LIFTOFF!!!");
 }
 
 fn loops_with_labels() {
