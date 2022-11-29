@@ -8,7 +8,7 @@ fn main() {
     let secret_number = rand::thread_rng().gen_range(1..=100);  // immutable variable (default)
 
     loop {
-        println!("PLease input your guess");
+        println!("Please input your guess");
 
         let mut guess = String::new();  // mutable variable 
     
