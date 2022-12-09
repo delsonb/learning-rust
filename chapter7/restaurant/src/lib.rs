@@ -64,5 +64,18 @@ pub fn eat_at_restaurant() {
     let order2 = back_of_house::Appetizer::Salad;
 }
 
+mod customer {
+    use crate::front_of_house::hosting;
+    use crate::front_of_house::hosting::add_to_waitlist;
+
+    use crate::back_of_house::Breakfast; // When bringing in sctructs, enum, and others, it`s idiomatic to specify the full path
+
+    pub fn eat_at_restaurant() {
+        hosting::add_to_waitlist();  // This is the idiomatic way to bring a FUNCTION in scope, making it clear that the function isn't locally defined
+        add_to_waitlist();
+    }
+}
+
+
 fn deliver_order() {}
 
