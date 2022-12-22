@@ -1,8 +1,57 @@
 use std::fs::File;
+use std::error::Error;
 use std::io::ErrorKind;
+use std::io::{self, Read};
 
-fn main() {
-    handling_result_without_match();
+// main() can return () or Result<(), E>
+fn main() -> Result((), Box<dyn Error>){  // Box<dyn Error> is a trait object, meaning "any kind of error"
+    let greeting_file = File::open("hello.txt")?;
+
+    Ok(())
+}
+
+fn using_question_mark_when_returning_option(text: &str) -> Option<char> {
+    // return last char of the first line
+    text.lines().next()?.chars().last()
+}
+
+fn even_even_shorter_read_username_from_file -> Result<String, io::Error> {
+    fs::read_to_string("hello.txt");
+}
+
+fn even_shorter_read_username_from_file() -> Result<String, io::Error> {
+    let mut username = String::new();
+
+    File::open("hello.txt")?.read_to_string(&mut username)?;
+    Ok(username)
+}
+
+// The question mark operator allows us to propagate errors more easily
+fn short_read_username_from_file() -> Result<String, io::Error> {
+    // if OK(_), the value inside the Ok is returned, else the error is returned as if we had used "return"
+    // ? automatically tries to use "from" to convert the type of the error to the return type of our function 
+    let mut username_file = File::open("hello.txt")?;  
+    let mut username = String::new();
+    username_file.read_to_string(&mut username)?;
+    Ok(username)
+}
+
+// By getting the error back, the calling code can decide to call panic!, to use a default
+// username or get the username from somewhere other than a file
+fn read_username_from_file() -> Result<String, io::Error> {
+    let username_file_result = file::open("hello.txt");
+
+    let mut username_file = match username_file_result {
+        Ok(file) => file,
+        Err(e) => return Err(e),
+    };
+
+    let mut username = String::new();
+
+    match username_file.read_to_string(&mut username) {
+        Ok(_) => Ok(username),
+        Err(e) => Err(e),
+    }
 }
 
 fn handling_with_expect() {
