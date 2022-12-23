@@ -1,5 +1,58 @@
 fn main() {
-    largest_number_v2();
+    largest_number_and_char();
+}
+
+// Section: avoinding duplication among types with generics
+
+fn largest_generic<T: std::cmp::PartialOrd>(list: &[T]) -> &T {
+    let mut largest = &list[0];
+
+    for item in list {
+        if item > largest {  // T must be a type the implements ordering
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+// Section: finding the largest for vectors of different data types
+
+fn largest_number_and_char() {
+    let number_list = vec![34, 50, 25, 100, 65];
+
+    let result = largest_i32(&number_list);
+    println!("The largest number is {}", result);
+
+    let char_list = vec!['y', 'm', 'a', 'q'];
+
+    let result = largest_char(&char_list);
+    println!("The largest char is {}", result);
+}
+
+
+fn largest_i32(list: &[i32]) -> &i32 {
+    let mut largest = &list[0];
+
+    for item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
+}
+
+fn largest_char(list: &[char]) -> &char {
+    let mut largest = &list[0];
+
+    for item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
+
+    largest
 }
 
 // Section: avoid coding duplication
